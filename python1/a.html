@@ -1,0 +1,163 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title></title>
+	<script type="text/javascript">
+		function $(id){
+			return document.getElementById(id);
+		}
+	</script>
+</head>
+<body>
+	<center>
+	<h1 style="color:red">11.16练习</h1>
+	<form method="post" action="./ce.py" onsubmit="return checkAll()">
+		<table>
+		<tr>
+			<td>用户名</td>
+			<td><input type="text" id="uname" name="uname" onblur="checkName()"><span id="showName"></span></td>
+		</tr>
+		<tr>
+			<td>密码</td>
+			<td><input type="password" id="pwd" name="pwd" onblur="checkPwd()"><span id="showpwd"></span></td>
+		</tr>
+		<tr>
+			<td>确认密码</td>
+			<td><input type="password" id="rpwd" name="rpwd" onblur="checkRpwd()"><span id='showrpwd'></span></td>
+		</tr>
+		<tr>
+			<td>手机号</td>
+			<td><input type="text" id="phone" name="phone" onblur="checkPhone()"> <span id='showphone'></span></td>
+		</tr>
+		<tr>
+			<td>邮箱</td>
+			<td><input type="text" id="smail" name="smail" onblur="checkSmail()"> <span id='showsmail'></span></td>
+		</tr>
+		<tr>
+			<td>个人简介</td>
+			<td><textarea id="content" name="jie" rows="5" cols="10" onkeyup="checkCon()"></textarea> <span id='showcon'></span></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><input type="submit" value="提交"></td>
+		</tr>
+		</table>
+	</form>
+	</center>
+	<script type="text/javascript">
+	//自定义函数验证姓名
+	function checkName(){
+		var username = $('uname').value;
+		if(username == ''){
+			$('showName').innerHTML = '不能为空';
+			$('showName').style.color = "red";
+			return false;
+		}else{
+			$('showName').innerHTML = '√';
+			$('showName').style.color = "green";
+			return true;
+		}
+	}
+	//密码
+	function checkPwd(){
+		var pwd = $('pwd').value;
+		if(pwd == ''){
+			$('showpwd').innerHTML = '不能为空';
+			$('showpwd').style.color = "red";
+			return false;
+		}else{
+			$('showpwd').innerHTML = '√';
+			$('showpwd').style.color = "green";
+			return true;
+		}
+	}
+	//密码
+	function checkRpwd(){
+		var pwd = $('pwd').value;
+		var rpwd = $('rpwd').value;
+		if(rpwd == ''){
+			$('showrpwd').innerHTML = "确认密码不能为空";
+			$('showrpwd').style.color = "red";
+			return false;
+		}else{
+			if(pwd != rpwd){
+				$('showrpwd').innerHTML = "两次密码不一致";
+				$('showrpwd').style.color = "red";
+				return false;
+			}else{
+				$('showrpwd').innerHTML = "√";
+				$('showrpwd').style.color = "green";
+				return true;
+			}
+			return true;
+		}
+	}
+	//手机号
+	function checkPhone(){
+		var phone=$('phone').value;
+		if(phone==''){
+			$('showphone').innerHTML = '不能为空';
+			$('showphone').style.color = "red";
+			return false;
+		}
+		var reg=/^1[3,5,8]\d{9}$/;
+		if(!reg.test(phone)){
+			$('showphone').innerHTML="<font color='red'>手机11位以15，18，13开头</font>";
+			return false;
+		}else{
+			$('showphone').innerHTML="√";
+			return true;
+		}
+	}
+	//邮箱
+	function checkSmail(){
+		var smail=$('smail').value;
+		if(smail==''){
+			$('showsmail').innerHTML = '不能为空';
+			$('showsmail').style.color = "red";
+			return false;
+		}
+		var reg=/^\w+@\w+(\.)(com|cn)$/;
+		if(!reg.test(smail)){
+			$('showsmail').innerHTML="<font color='red'>邮箱格式为22@qq.com</font>";
+			return false;
+		}else{
+			$('showsmail').innerHTML="√";
+			return true;
+		}
+	}
+	//简介
+	function checkCon(){
+		var content = $('content').value;
+		if(content == ''){
+			$('showcon').innerHTML = "不能为空";
+			$('showcon').style.color = "red";
+			return false;
+		}else{
+			var str = content.length;
+			if(str<20){
+				$('showcon').innerHTML = "字数不能少于20字";
+				$('showcon').style.color = "red";
+				return false;
+			}else{
+				$('showcon').innerHTML = "对";
+				$('showcon').style.color = "green";	
+				return true;
+			}	
+			return true;
+		}
+	}
+
+	function checkAll(){
+		if(checkName()&checkPwd()&checkRpwd()&checkPhone()&checkSmail()&checkCon()){
+			return false;
+		}else{
+			return true;
+		}
+	}
+</script>
+</body>
+
+</html>
